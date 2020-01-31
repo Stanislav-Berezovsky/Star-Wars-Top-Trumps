@@ -1,3 +1,12 @@
-<People @title="List of Scientists" @people={{@model}} />
+<h2>You play the game with {{@model.role}} cards</h2>
+
+<div class="cards-container">
+    {{#if @model.arePeopleRole}}
+        <People @playersList={{@model.playersList}} />
+    {{else}}
+        <Starships @starshipsList={{@model.playersList}} />
+   {{/if}}
+</div>
+   
 
 {{outlet}}
