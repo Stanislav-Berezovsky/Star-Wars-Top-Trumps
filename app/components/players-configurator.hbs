@@ -1,0 +1,12 @@
+<section class="players-configurator-container">
+    <select class="custom-select players-configurator-element" onchange={{action 'onSelectHandler' value="target.value"}}>
+        {{#each this.options as |optionItem|}}
+              <option value="{{optionItem}}">{{optionItem}}</option>
+        {{/each}}
+    </select>
+
+    
+    <LinkTo @route="game" @model={{this.selectedItem}} class="btn btn-primary button players-configurator-element">
+        Play {{this.selectedItem}} game
+    </LinkTo>
+</section>
