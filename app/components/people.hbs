@@ -1,4 +1,10 @@
 {{#each @playersList as |playerCard|}}
-  <Player @playerName={{playerCard.name}} />
+  <Player @playerName={{playerCard.name}} @isWinner={{playerCard.isWinner}}>
+    <div>
+      <p>Mass: {{playerCard.mass}}</p>
+      <p>Height: {{playerCard.height}}</p>
+      <p>Hair color {{playerCard.hair_color}}</p>
+    </div>
+  </Player>
 {{/each}}
 
