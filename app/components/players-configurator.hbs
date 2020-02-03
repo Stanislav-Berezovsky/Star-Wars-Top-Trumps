@@ -4,8 +4,6 @@
               <option value="{{optionItem}}">{{optionItem}}</option>
         {{/each}}
     </select>
-
-    
     <LinkTo @route="game" @model={{this.selectedItem}} class="btn btn-primary button players-configurator-element">
         Play {{this.selectedItem}} game
     </LinkTo>

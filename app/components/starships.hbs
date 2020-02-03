@@ -1,11 +1,9 @@
 {{#each @starshipsList as |playerCard|}}
-  <Player @playerName={{playerCard.name}} @isWinner={{playerCard.isWinner}>
+  <Player @playerName={{playerCard.name}} @isWinner={{playerCard.isWinner}}>
     <div>
         <p>Crew: {{playerCard.crew}} people</p>
         <p>Manufacturer: {{playerCard.manufacturer}}</p>
         <p>Model: {{playerCard.manufacturer}}</p>
     </div>
-    
-    
   </Player>
 {{/each}}

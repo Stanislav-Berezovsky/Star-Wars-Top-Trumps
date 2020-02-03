@@ -5,22 +5,30 @@ import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | players-configurator', function(hooks) {
   setupRenderingTest(hooks);
+  const PEOPLE = 'people';
+  const STARSHIPS = 'starships';
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
+  test('should set up options elements', async function(assert) {
     await render(hbs`<PlayersConfigurator />`);
+    const options =  this.element.getElementsByTagName('option');
+    assert.equal(options[0].textContent.trim(), PEOPLE);
+    assert.equal(options[1].textContent.trim(), STARSHIPS);
+    assert.equal(options.length, 2);
+  });
 
-    assert.equal(this.element.textContent.trim(), '');
+  test('should properly set link text', async function(assert) {
+    const peopleResult = `Play ${PEOPLE} game`
+    await render(hbs`<PlayersConfigurator />`);
+    const aElement = this.element.querySelector('a');
+    assert.equal(aElement.textContent.trim(), peopleResult);
 
-    // Template block usage:
-    await render(hbs`
-      <PlayersConfigurator>
-        template block text
-      </PlayersConfigurator>
-    `);
+    const selectElement =  this.element.querySelector('select');
+    selectElement.value = STARSHIPS;
+    selectElement.dispatchEvent(new Event('change'));
+    assert.equal(aElement.textContent.trim(), `Play ${STARSHIPS} game`);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    selectElement.value = PEOPLE;
+    selectElement.dispatchEvent(new Event('change'));
+    assert.equal(aElement.textContent.trim(), peopleResult);
   });
 });

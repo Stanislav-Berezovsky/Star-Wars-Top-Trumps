@@ -6,21 +6,41 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | player', function(hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('should renders properly render player component', async function(assert) {
+    const h3HeadingText = "test h3 heading text";
+    const description = "test description";
 
-    await render(hbs`<Player />`);
-
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
     await render(hbs`
-      <Player>
-        template block text
+      <Player @playerName="test h3 heading text">
+        test description
       </Player>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.querySelector('h3').textContent.trim(), h3HeadingText);
+    assert.equal(this.element.querySelector('p').textContent.trim(), description);
+  });
+
+  test('h3 heading should contain "badge-success" class', async function(assert) {
+    const h3HeadingText = "test h3 heading text";
+
+    this.set('playerName', h3HeadingText);
+
+    await render(hbs`
+      <Player @isWinner=true />
+    `);
+
+    assert.equal(this.element.querySelector('h3').classList.contains("badge-success"), true);
+  });
+
+  test('h3 heading should not contain "badge-success" class', async function(assert) {
+    const h3HeadingText = "test h3 heading text";
+
+    this.set('playerName', h3HeadingText);
+
+    await render(hbs`
+      <Player />
+    `);
+
+    assert.equal(this.element.querySelector('h3').classList.contains("badge-success"), false);
   });
 });
